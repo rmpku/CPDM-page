@@ -1,0 +1,175 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models</title>
+
+    <meta
+        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
+        name="description" />
+    <meta content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models" property="og:title" />
+    <meta
+        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
+        property="og:description" />
+    <meta content="https://llm-grounded-diffusion.github.io/visualizations.jpg"
+        property="og:image" />
+    <meta content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models" property="twitter:title" />
+    <meta
+        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
+        property="twitter:description" />
+    <meta content="https://llm-grounded-diffusion.github.io/visualizations.jpg"
+        property="twitter:image" />
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link href="style.css" rel="stylesheet" type="text/css" /> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="section">
+        <div class="container">
+            <div class="title-row">
+                <h1 class="title">LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models</h1>
+            </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col">
+                    <a href="https://tonylian.com" target="_blank" class="author-text">
+                        Long Lian
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://sites.google.com/site/boyilics/home" target="_blank" class="author-text">
+                        Boyi Li
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://www.adamyala.org/" target="_blank" class="author-text">
+                        Adam Yala
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank" class="author-text">
+                        Trevor Darrell
+                    </a>
+                </div>
+            </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col">
+                    UC Berkeley
+                </div>
+                <div class="base-col author-col">
+                    UC Berkeley
+                </div>
+                <div class="base-col author-col">
+                    UC Berkeley/UCSF
+                </div>
+                <div class="base-col author-col">
+                    UC Berkeley
+                </div>
+            </div>
+            <div class="link-labels base-row">
+                <div class="base-col icon-col"><a href="https://arxiv.org/pdf/2305.13655.pdf" target="_blank"
+                        class="link-block">
+                    <i class="fa fas fa-book main-icon" style="font-size: 75px"></i>
+                    </a></div>
+                <div class="base-col icon-col"><a href='https://bair.berkeley.edu/blog/2023/05/23/lmd/' class="link-block">
+                    <i class="fa fa-rss main-icon" style="font-size: 75px"></i>
+                    </a></div>
+                <div class="base-col icon-col"><a href='https://huggingface.co/spaces/longlian/llm-grounded-diffusion' class="link-block">
+                    <i class="fa fa-cube main-icon" style="font-size: 75px"></i>
+                    </a></div>
+                    <div class="base-col icon-col"><a href='https://github.com/TonyLianLong/LLM-groundedDiffusion' class="link-block">
+                        <i class="fa fa-github main-icon" style="font-size: 75px"></i>
+                        </a></div>
+                <div class="base-col icon-col"><a href="#citation" class="link-block">
+                    <i class="fa fa-graduation-cap main-icon" style="font-size: 75px"></i>
+                    </a></div>
+            </div>
+            <div class="link-labels base-row">
+                <div class="base-col icon-col">
+                    <strong class="link-labels-text">Paper</strong>
+                </div>
+                <div class="base-col icon-col">
+                    <strong class="link-labels-text">5-min Blog Post</strong>
+                </div>
+                <div class="base-col icon-col">
+                    <strong class="link-labels-text">Full Demo (New)</strong>
+                </div>
+                <div class="base-col icon-col">
+                    <strong class="link-labels-text">Code</strong>
+                </div>
+                <div class="base-col icon-col">
+                    <strong class="link-labels-text">Citation</strong>
+                </div>
+            </div>
+            <h1 class="tldr">
+                <b>TL;DR</b>: Text Prompt -> LLM -> Intermediate Representation (such as an image layout) -> Stable Diffusion -> Image.
+            </h1>
+
+            <video id="main-video" autobuffer autoplay muted loop controls>
+                <source id="mp4" src="./lmd_video.mp4" type="video/mp4">
+            </video>
+
+            <div class="base-row add-top-padding">
+                <h1 id="abstract">LLM-guided Diffusion</h1>
+                <p class="paragraph">
+                We equip diffusion models with enhanced spatial and common sense reasoning by using off-the-shelf frozen LLMs in a novel two-stage generation process.
+                </p>
+                <div class="base-row add-top-padding">
+                    <img class="img" src="main_figure.jpg" />
+                </div>
+            </div>
+
+            <div class="base-row add-top-padding">
+                <h1>Visualizations</h1>
+                <p class="paragraph">
+                    LLM-grounded Diffusion enhances the prompt understanding ability of text-to-image diffusion models.
+                </p>
+                <div class="base-row add-top-padding">
+                    <img class="img" src="visualizations.jpg" />
+                </div>
+            </div>
+
+            <div class="base-row add-top-padding">
+                <h1>Additional Capabilities</h1>
+                <p class="paragraph">
+                    Incorporating an LLM for prompt understanding, LMD is able to perform dialog-based scene specification and generation from prompts in a language (Chinese in the example above) that the underlying diffusion model does not support.
+                </p>
+                <div class="base-row add-top-padding">
+                    <p>
+                        <img class="img" src="additional_abilities.jpg" />
+                    </p>
+                </div>
+                <h1>Additional Capabilities: Multi-round Scene Specification</h1>
+                <div class="base-row add-top-padding">
+                    <img class="img" src="multiround.gif" style="max-width: 800px"/>
+                </div>
+            </div>
+
+            <div class="base-row add-top-padding">
+                <h1>More Visualizations with LMD Layout</h1>
+                <div class="base-row add-top-padding">
+                    <img class="img" src="visualizations_main.jpg" />
+                </div>
+            </div>
+
+            <div class="citation add-top-padding">
+                <h1 id="citation">Citation</h1>
+                <p> If you use this work or find it helpful, please consider citing: </p>
+                <pre id="codecell0">
+@article{lian2023llmgrounded,
+    title={LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models}, 
+    author={Lian, Long and Li, Boyi and Yala, Adam and Darrell, Trevor},
+    journal={arXiv preprint arXiv:2305.13655},
+    year={2023}
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <p class="credit">Credit: The design of this project page references the project pages of <a href="https://www.matthewtancik.com/nerf">NeRF</a>, <a
+            href="https://github.com/DeepMotionEditing/DeepMotionEditing.github.io">DeepMotionEditing</a>, and <a
+            href="https://www.lerf.io/">LERF</a>.</p>
+</body>
