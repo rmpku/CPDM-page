@@ -1,175 +1,470 @@
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+  <title>Q-Diffusion: Quantizing Diffusion Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
-    <meta
-        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
-        name="description" />
-    <meta content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models" property="og:title" />
-    <meta
-        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
-        property="og:description" />
-    <meta content="https://llm-grounded-diffusion.github.io/visualizations.jpg"
-        property="og:image" />
-    <meta content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models" property="twitter:title" />
-    <meta
-        content="LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models"
-        property="twitter:description" />
-    <meta content="https://llm-grounded-diffusion.github.io/visualizations.jpg"
-        property="twitter:image" />
-    <meta property="og:type" content="website" />
-    <meta content="summary_large_image" name="twitter:card" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-    <link href="style.css" rel="stylesheet" type="text/css" /> 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+<meta property="og:image" content="./images/intro_example.png"/>
+<meta property="og:title" content="Q-Diffusion: Quantizing Diffusion Models" />
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 
-</head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-131374046-3', 'auto');
+ga('send', 'pageview');
+// redefining default features
+var _POPUP_FEATURES = 'width=500,height=300,resizable=1,scrollbars=1,titlebar=1,status=1';
+</script>
+<link media="all" href="glab.css" type="text/css" rel="StyleSheet">
+<!-- <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css"> -->
+<link rel="icon" href="../static/favicon.ico">
+<style type="text/css" media="all">
+IMG {
+  PADDING-RIGHT: 0px;
+  PADDING-LEFT: 0px;
+  FLOAT: right;
+  PADDING-BOTTOM: 0px;
+  PADDING-TOP: 0px
+}
+#primarycontent {
+  MARGIN-LEFT: auto; ; WIDTH: expression(document.body.clientWidth >
+1000? "1000px": "auto" ); MARGIN-RIGHT: auto; TEXT-ALIGN: left; max-width:
+1000px }
+BODY {
+  TEXT-ALIGN: center
+}
+</style>
+
+<style type="text/css">
+  body {
+    font-family: "HelveticaNeue-Light", Helvetica, Georgia, sans-serif, Arial, "Lucida Grande";
+    font-weight:300;
+    font-size:18px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+  h1 {
+    font-weight:300;
+  }
+
+  div {
+    max-width: 95%;
+    margin:auto;
+    padding: 10px;
+  }
+
+  .table-like {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .disclaimerbox {
+    background-color: #eee;
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    padding: 20px;
+  }
+
+  video.header-vid {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
+
+  img.header-img {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.rounded {
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  a:link,a:visited
+  {
+    color: #1367a7;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #208799;
+  }
+
+  td.dl-link {
+    height: 160px;
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+  }
+
+
+  .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+  }
+
+  .vert-cent {
+    position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  hr
+  {
+    border: 0;
+    height: 1px;
+    max-width: 1100px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+
+  #authors td {
+    padding-bottom:5px;
+    padding-top:30px;
+  }
+</style>
 
 <body>
-    <div class="section">
-        <div class="container">
-            <div class="title-row">
-                <h1 class="title">LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models</h1>
-            </div>
-            <div class="base-row author-row">
-                <div class="base-col author-col">
-                    <a href="https://tonylian.com" target="_blank" class="author-text">
-                        Long Lian
-                    </a>
-                </div>
-                <div class="base-col author-col">
-                    <a href="https://sites.google.com/site/boyilics/home" target="_blank" class="author-text">
-                        Boyi Li
-                    </a>
-                </div>
-                <div class="base-col author-col">
-                    <a href="https://www.adamyala.org/" target="_blank" class="author-text">
-                        Adam Yala
-                    </a>
-                </div>
-                <div class="base-col author-col">
-                    <a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank" class="author-text">
-                        Trevor Darrell
-                    </a>
-                </div>
-            </div>
-            <div class="base-row author-row">
-                <div class="base-col author-col">
-                    UC Berkeley
-                </div>
-                <div class="base-col author-col">
-                    UC Berkeley
-                </div>
-                <div class="base-col author-col">
-                    UC Berkeley/UCSF
-                </div>
-                <div class="base-col author-col">
-                    UC Berkeley
-                </div>
-            </div>
-            <div class="link-labels base-row">
-                <div class="base-col icon-col"><a href="https://arxiv.org/pdf/2305.13655.pdf" target="_blank"
-                        class="link-block">
-                    <i class="fa fas fa-book main-icon" style="font-size: 75px"></i>
-                    </a></div>
-                <div class="base-col icon-col"><a href='https://bair.berkeley.edu/blog/2023/05/23/lmd/' class="link-block">
-                    <i class="fa fa-rss main-icon" style="font-size: 75px"></i>
-                    </a></div>
-                <div class="base-col icon-col"><a href='https://huggingface.co/spaces/longlian/llm-grounded-diffusion' class="link-block">
-                    <i class="fa fa-cube main-icon" style="font-size: 75px"></i>
-                    </a></div>
-                    <div class="base-col icon-col"><a href='https://github.com/TonyLianLong/LLM-groundedDiffusion' class="link-block">
-                        <i class="fa fa-github main-icon" style="font-size: 75px"></i>
-                        </a></div>
-                <div class="base-col icon-col"><a href="#citation" class="link-block">
-                    <i class="fa fa-graduation-cap main-icon" style="font-size: 75px"></i>
-                    </a></div>
-            </div>
-            <div class="link-labels base-row">
-                <div class="base-col icon-col">
-                    <strong class="link-labels-text">Paper</strong>
-                </div>
-                <div class="base-col icon-col">
-                    <strong class="link-labels-text">5-min Blog Post</strong>
-                </div>
-                <div class="base-col icon-col">
-                    <strong class="link-labels-text">Full Demo (New)</strong>
-                </div>
-                <div class="base-col icon-col">
-                    <strong class="link-labels-text">Code</strong>
-                </div>
-                <div class="base-col icon-col">
-                    <strong class="link-labels-text">Citation</strong>
-                </div>
-            </div>
-            <h1 class="tldr">
-                <b>TL;DR</b>: Text Prompt -> LLM -> Intermediate Representation (such as an image layout) -> Stable Diffusion -> Image.
-            </h1>
 
-            <video id="main-video" autobuffer autoplay muted loop controls>
-                <source id="mp4" src="./lmd_video.mp4" type="video/mp4">
-            </video>
+<div id="primarycontent">
+<center><h1 style="font-size: 182%"><span style="font-weight: bold">Q-Diffusion:</span> Quantizing Diffusion Models</h1></center>
+<center>
+  <table align=center>
+      <tr>
+          <td align=center>
+              <center>
+                  <span style="font-size:115%"><a href="https://xiuyuli.com/">Xiuyu Li</a> <sup>1</sup></span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+              <center>
+                  <span style="font-size:115%"><a href="https://github.com/kriskrisliu">Yijiang Liu</a> <sup>2</sup></span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+              <center>
+                  <span style="font-size:115%"><a href="https://tonylian.com/">Long Lian</a> <sup>1</sup></span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+            <center>
+                <span style="font-size:115%"><a href="https://sites.google.com/view/huanrui-yang">Huanrui Yang</a> <sup>1</sup></span>
+            </center>
+        </td>
+        <td width="36"/>
+        <td align=center>
+          <center>
+              <span style="font-size:115%"><a href="https://dong-zhen.com/">Zhen Dong</a> <sup>1</sup></span>
+          </center>
+      </td>
 
-            <div class="base-row add-top-padding">
-                <h1 id="abstract">LLM-guided Diffusion</h1>
-                <p class="paragraph">
-                We equip diffusion models with enhanced spatial and common sense reasoning by using off-the-shelf frozen LLMs in a novel two-stage generation process.
-                </p>
-                <div class="base-row add-top-padding">
-                    <img class="img" src="main_figure.jpg" />
-                </div>
-            </div>
+      </tr>
+  </table>
+  <table>
+      <tr>
+          <td align=center>
+              <center>
+                  <span style="font-size:115%"><a
+                          href="https://ddkang.github.io/">Daniel Kang</a> <sup>1 3</sup></span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+            <center>
+                <span style="font-size:115%"><a
+                        href="https://www.shanghangzhang.com/">Shanghang Zhang</a> <sup>4</sup></span>
+            </center>
+        </td>
+        <td width="36"/>
+          <td align=center>
+              <center>
+                  <span style="font-size:115%"><a
+                          href="https://people.eecs.berkeley.edu/~keutzer/">Kurt Keutzer</a> <sup>1</sup></span>
+              </center>
+          </td>
+      </tr>
+  </table>
+  <table>
+      <tr>
+          <td align=center>
+              <center>
+                  <span style="font-size:100%"><sup>1</sup> UC Berkeley</span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+              <center>
+                  <span style="font-size:100%"><sup>2</sup> Nanjing University</span>
+              </center>
+          </td>
+          <td width="36"/>
+          <td align=center>
+            <center>
+                <span style="font-size:100%"><sup>3</sup> University of Illinois Urbana-Champaign</span>
+            </center>
+        </td>
+        <td width="36"/>
+          <td align=center>
+              <center>
+                  <span style="font-size:100%"><sup>4</sup> Peking University</span>
+              </center>
+          </td>
+      </tr>
+  </table>
+</center>
 
-            <div class="base-row add-top-padding">
-                <h1>Visualizations</h1>
-                <p class="paragraph">
-                    LLM-grounded Diffusion enhances the prompt understanding ability of text-to-image diffusion models.
-                </p>
-                <div class="base-row add-top-padding">
-                    <img class="img" src="visualizations.jpg" />
-                </div>
-            </div>
+<table align=center width=250px>
+  <tr>
+      <td align=center width=120px>
+          <center>
+              <span style="font-size:24px"><a href='http://arxiv.org/abs/2302.04304'>[Paper]</a></span>
+          </center>
+      </td>
+      <td align=center width=120px>
+          <center>
+              <span style="font-size:24px"><a href='https://github.com/Xiuyu-Li/q-diffusion'>[GitHub]</a></span><br>
+          </center>
+      </td>
+  </tr>
+</table>
+<center>
 
-            <div class="base-row add-top-padding">
-                <h1>Additional Capabilities</h1>
-                <p class="paragraph">
-                    Incorporating an LLM for prompt understanding, LMD is able to perform dialog-based scene specification and generation from prompts in a language (Chinese in the example above) that the underlying diffusion model does not support.
-                </p>
-                <div class="base-row add-top-padding">
-                    <p>
-                        <img class="img" src="additional_abilities.jpg" />
-                    </p>
-                </div>
-                <h1>Additional Capabilities: Multi-round Scene Specification</h1>
-                <div class="base-row add-top-padding">
-                    <img class="img" src="multiround.gif" style="max-width: 800px"/>
-                </div>
-            </div>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="bottom" style="overflow:hidden;">
+        <img class="result" src="images/intro_example.png" style="width: 950px;object-fit: cover;">
+    </td>
+  </tr>
+</table>
 
-            <div class="base-row add-top-padding">
-                <h1>More Visualizations with LMD Layout</h1>
-                <div class="base-row add-top-padding">
-                    <img class="img" src="visualizations_main.jpg" />
-                </div>
-            </div>
 
-            <div class="citation add-top-padding">
-                <h1 id="citation">Citation</h1>
-                <p> If you use this work or find it helpful, please consider citing: </p>
-                <pre id="codecell0">
-@article{lian2023llmgrounded,
-    title={LLM-grounded Diffusion: Enhancing Prompt Understanding of Text-to-Image Diffusion Models with Large Language Models}, 
-    author={Lian, Long and Li, Boyi and Yala, Adam and Darrell, Trevor},
-    journal={arXiv preprint arXiv:2305.13655},
-    year={2023}
+<style type="text/css">
+  .tooltip {
+  /*display: inline-block;*/
+  padding-bottom: 0px;
+  /*border-bottom: 1px dotted black;*/
 }
-                </pre>
-            </div>
-        </div>
-    </div>
 
-    <p class="credit">Credit: The design of this project page references the project pages of <a href="https://www.matthewtancik.com/nerf">NeRF</a>, <a
-            href="https://github.com/DeepMotionEditing/DeepMotionEditing.github.io">DeepMotionEditing</a>, and <a
-            href="https://www.lerf.io/">LERF</a>.</p>
+.tooltip .tooltipdetails {
+  display: block;
+  visibility: hidden;
+  width: 980px;
+  color: black;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  border:3px solid black;
+  /*bottom: 100%;*/
+  /*left: 0%;*/
+  /*margin-left: -60px;*/
+  background-color:white;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip:hover .tooltipdetails {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<h2>Abstract</h2>
+<div style="font-size:14px; text-align: justify;">
+<p>
+  Diffusion models have achieved great success in image synthesis through iterative noise estimation using deep neural networks. However, the slow inference, high memory consumption, 
+  and computation intensity of the noise estimation model hinder the efficient adoption of diffusion models. Although post-training quantization (PTQ) is considered a go-to compression method for other tasks, 
+  it does not work out-of-the-box on diffusion models. We propose a novel PTQ method specifically tailored towards the unique multi-timestep pipeline and model architecture of the diffusion models, 
+  which compresses the noise estimation network to accelerate the generation process. We identify the key difficulty of diffusion model quantization as the changing output distributions of noise estimation networks over 
+  multiple time steps and the bimodal activation distribution of the shortcut layers within the noise estimation network. We tackle these challenges with <em class="ul" style="font-weight: bold;">time step-aware calibration</em> and <em class="ul" style="font-weight: bold;">shortcut-splitting quantization</em> in this work. 
+  Experimental results show that our proposed method is able to quantize full-precision unconditional diffusion models into 4-bit while maintaining comparable performance (<em class="ul" style="font-weight: bold;">small FID change of at most 2.34</em> compared to >100 for traditional PTQ) in a <em class="ul" style="font-weight: bold;">training-free</em> manner. 
+  Our approach can also be applied to text-guided image generation, where we can <em class="ul" style="font-weight: bold;">run stable diffusion in 4-bit weights</em> with high generation quality for the first time. 
+</p>
+</div>
+
+<hr>
+<h2> Time Step-aware Calibration Data Sampling</h2>
+
+<div style="text-align: justify;">
+  Traditional PTQ inference only goes through the quantized model once, while diffusion models quantization needs to address the accumulated quantization errors and varying activation distributions in the multi-time step inference. Addtionally, conventional PTQ approaches usually either use synthetic data that contains inconsistency with real inputs during the inference time or are not data-free. Our Q-Diffusion samples the calibration dataset with inputs uniformly from multiple time steps, which are an accurate reflection of the production data in a data-free manner. 
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="center" valign="bottom" style="overflow:hidden;">
+          <img class="result" src="images/ts_act.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+      </td>
+      </td>
+    </tr>
+  </table>
+  <div style="font-size:12.3px; text-align: justify;padding-top: 0px;margin-left: 0px; margin-right: 0px;max-width: 100%">
+    Activation ranges across all time steps of FP32 DDIM model on CIFAR-10. The activation distributions gradually change, with <span style="font-weight: bold;">neighboring</span> time steps being <span style="font-weight: bold;">similar</span> and <span style="font-weight: bold;">distant</span> ones being <span style="font-weight: bold;">distinctive</span>
+  </div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="center" valign="bottom" style="overflow:hidden;">
+          <img class="result" src="images/teaser.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+      </td>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+<h2>Shortcut-splitting Quantization</h2>
+
+<div style="text-align: justify;">
+  The activation distributions of the concatenated deep feature channels (<span style="font-weight: bold;"><em>X</em><sub>1</sub></span>) and shallow feature channels (<span style="font-weight: bold;"><em>X</em><sub>2</sub></span>) in shortcuts differ significantly, resulting in a bimodal weight distribution that is challenging to quantize. 
+  We propose a "split" quantization scheme that performs quantization prior to concatenation, requiring negligible additional memory or compute. 
+</div>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="bottom" style="overflow:hidden;">
+        <img class="result" src="images/split_quant.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+    </td>
+    </td>
+  </tr>
+</table>
+
+<hr>
+<h2>Results: Unconditional Generation</h2>
+
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="bottom" style="overflow:hidden;">
+        <img class="result" src="images/lsun.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+    </td>
+    </td>
+  </tr>
+</table>
+<tr>
+  <td align=center width=400px>
+      <center>
+          <br>
+          <p style="font-size:18px">LSUN results using Q-Diffusion and Linear Quantization (round-to-nearest), Latent Diffusion</p>
+      </center>
+  </td>
+</tr>
+
+<hr>
+<h2>Results: Text-guided Image Generation</h2>
+
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="bottom" style="overflow:hidden;">
+        <img class="result" src="images/sd.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+    </td>
+    </td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="bottom" style="overflow:hidden;">
+        <img class="result" src="images/intro_example.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
+    </td>
+    </td>
+  </tr>
+</table>
+<tr>
+  <td align=center width=400px>
+      <center>
+          <br>
+          <p style="font-size:18px">txt2img results using Q-Diffusion and Linear Quantization (round-to-nearest), Stable Diffusion v1.4</p>
+      </center>
+  </td>
+</tr>
+
+<hr>
+<h2> Paper </h2>
+
+<table align=center>
+  <tr>
+      <td><a href="http://arxiv.org/abs/2302.04304"><img class="layered-paper-big" style="height:175px"
+      src="images/paper_thumbnail.jpg"/></a></td>  
+      <td><span style="font-size:14pt">X. Li, Y. Liu, L. Lian, H. Yang, Z. Dong, D. Kang, S. Zhang, and K. Keutzer<br>
+      <b>Q-Diffusion: Quantizing Diffusion Models</b><br>
+      <em>arXiv:2302.04304</em>, 2023.<br></span>
+      </td>
+  </tr>
+</table>
+<br><br><br>
+
+<h3 style="margin-top: -1.6em;text-align:left"><span style="font-size: 14.5pt">Citation</span></h3>
+ <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;max-width:100%">
+ <pre style="font-size: 10pt; margin: .3em 0px;text-align: left;
+     white-space: pre-wrap;       /* Since CSS 2.1 */
+     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+     white-space: -pre-wrap;      /* Opera 4-6 */
+     white-space: -o-pre-wrap;    /* Opera 7 */
+     word-wrap: break-word;       /* Internet Explorer 5.5+ */">
+@article{li2023qdiffusion,
+  title={Q-Diffusion: Quantizing Diffusion Models},
+  author={Li, Xiuyu and Liu, Yijiang and Lian, Long and Yang, Huanrui and Dong, Zhen and Kang, Daniel and Zhang, Shanghang and Keutzer, Kurt},
+  journal={arXiv},
+  year={2023}
+}
+</pre>
+</div>
+
+
+<br>
+<h2 style="text-align:left">Acknowledgements</h2>
+<p style="font-size:14px; text-align: justify; padding-bottom: 15px; padding-top: 5px">We thank Berkeley Deep Drive, Intel Corporation, Panasonic, and NVIDIA for supporting this research. 
+  We also would like to thank Sehoon Kim, Muyang Li, and Minkai Xu for their valuable feedback. The design of this project page template references the project pages of <a href="https://www.tongzhouwang.info/denoised_mdp/">Denoised MDPs</a> and a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project.
 </body>
+
+</html>
