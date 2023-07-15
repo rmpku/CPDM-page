@@ -333,19 +333,19 @@ BODY {
   <tr>
       <td align=center width=140px>
           <center>
-              <span style="font-size:24px"><a href='http://arxiv'>[Paper]</a></span>
+              <span style="font-size:24px"><a href='./372_a_dataset_and_benchmark_for_co.pdf'>[Paper]</a></span>
           </center>
         
       </td>
       <td align=center width=140px>
           <center>
-              <span style="font-size:24px"><a href='https://github.com'>[GitHub]</a></span><br>
+              <span style="font-size:24px"><a href='https://github.com/bamboosdu/unlearning_dataset'>[GitHub]</a></span><br>
           </center>
         
       </td>
       <td align=center width=140px>
           <center>
-              <span style="font-size:24px"><a href='https://github.com'>[Demo]</a></span><br>
+              <span style="font-size:24px"><a href='http://127.0.0.1:7861/'>[Demo]</a></span><br>
           </center>
         
       </td>
@@ -411,7 +411,7 @@ BODY {
 <h2> Statistics and Details of the CPDM dataset.</h2>
 
 <div style="text-align: justify;">
-'dataset description'
+  <h3><center> Dataset Description</h3>
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td align="center" valign="bottom" style="overflow:hidden;">
@@ -421,8 +421,9 @@ BODY {
     </tr>
   </table>
   <div style="font-size:12.3px; text-align: justify;padding-top: 0px;margin-left: 0px; margin-right: 0px;max-width: 100%">
-    Activation ranges across all time steps of FP32 DDIM model on CIFAR-10. The activation distributions gradually change, with <span style="font-weight: bold;">neighboring</span> time steps being <span style="font-weight: bold;">similar</span> and <span style="font-weight: bold;">distant</span> ones being <span style="font-weight: bold;">distinctive</span>
+    <!-- Activation ranges across all time steps of FP32 DDIM model on CIFAR-10. The activation distributions gradually change, with <span style="font-weight: bold;">neighboring</span> time steps being <span style="font-weight: bold;">similar</span> and <span style="font-weight: bold;">distant</span> ones being <span style="font-weight: bold;">distinctive</span> -->
   </div>
+  <h3><center> Pipeline of Data Generation</h3>
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td align="center" valign="bottom" style="overflow:hidden;">
@@ -434,7 +435,7 @@ BODY {
 </div>
 
 <hr>
-<!-- <h2>Shortcut-splitting Quantization</h2> -->
+<h3><center>Experimental Results of Model Unlearning</h3>
 
 <div style="text-align: justify;">
 <!--   The activation distributions of the concatenated deep feature channels (<span style="font-weight: bold;"><em>X</em><sub>1</sub></span>) and shallow feature channels (<span style="font-weight: bold;"><em>X</em><sub>2</sub></span>) in shortcuts differ significantly, resulting in a bimodal weight distribution that is challenging to quantize. 
@@ -450,7 +451,7 @@ BODY {
 </table>
 
 <hr>
-<!-- <h2>Results: Unconditional Generation</h2> -->
+<h3><center>Illustration Images</h3>
 
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -480,48 +481,49 @@ BODY {
     </td>
   </tr> -->
 </table>
-<table border="0" cellspacing="0" cellpadding="0">
+<!-- <table border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td align="center" valign="bottom" style="overflow:hidden;">
         <img class="result" src="images/intro_example.png" style="width: 1000px;margin: 1% 0 0% 0%;object-fit: cover;">
     </td>
     </td>
   </tr>
-</table>
-<tr>
+</table> -->
+<!-- <tr>
   <td align=center width=400px>
       <center>
-          <br>
+          <br> -->
 <!--           <p style="font-size:18px">txt2img results using Q-Diffusion and Linear Quantization (round-to-nearest), Stable Diffusion v1.4</p> -->
-      </center>
+      <!-- </center>
   </td>
-</tr>
+</tr> -->
 
-<hr>
+<!-- <hr> -->
 <h2> Paper </h2>
 
 <table align=center>
   <tr>
-      <td><a href="http://arxiv.org/abs/2302.04304"><img class="layered-paper-big" style="height:175px"
+      <td><a href="./372_a_dataset_and_benchmark_for_co.pdf"><img class="layered-paper-big" style="height:175px"
       src="images/paper_thumbnail.jpg"/></a></td>  
-      <td><span style="font-size:14pt">R. Ma<br>
+      <td><span style="font-size:14pt">R. Ma, Q. Zhou, B. Xiao, D. Zhou, X. Liu, A. Singh, Y. Qu, J. Feng, K. Keutzer, X. Xie, J. Hu, Z. Dong, S. Zhang<br>
 <!--               <td><span style="font-size:14pt">R. Ma, Y. Liu, L. Lian, H. Yang, Z. Dong, D. Kang, S. Zhang, and K. Keutzer<br> -->
 
       <b>A Dataset and Benchmark for Copyright Protection from Text-to-Image Diffusion Models</b><br>
-      <em>arXiv:</em>, 2023.<br></span>
+      <!-- <em>arXiv:</em>, 2023.<br></span> -->
+       2023.<br></span>
       </td>
   </tr>
 </table>
 <br><br><br>
 
-<h3 style="margin-top: -1.6em;text-align:left"><span style="font-size: 14.5pt">Citation</span></h3>
+<!-- <h3 style="margin-top: -1.6em;text-align:left"><span style="font-size: 14.5pt">Citation</span></h3>
  <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;max-width:100%">
  <pre style="font-size: 10pt; margin: .3em 0px;text-align: left;
      white-space: pre-wrap;       /* Since CSS 2.1 */
      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
      white-space: -pre-wrap;      /* Opera 4-6 */
      white-space: -o-pre-wrap;    /* Opera 7 */
-     word-wrap: break-word;       /* Internet Explorer 5.5+ */">
+     word-wrap: break-word;       /* Internet Explorer 5.5+ */"> -->
 <!-- @article{li2023qdiffusion,
   title={Q-Diffusion: Quantizing Diffusion Models},
   author={Li, Xiuyu and Liu, Yijiang and Lian, Long and Yang, Huanrui and Dong, Zhen and Kang, Daniel and Zhang, Shanghang and Keutzer, Kurt},
